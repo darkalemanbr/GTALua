@@ -14,7 +14,7 @@ function main_thread:AddThread(thread)
 	end
 	
 	-- register
-	print("[GTALua] Addon "..thread:GetName().." will run on the main thread")
+--	print("[GTALua] Addon "..thread:GetName().." will run on the main thread")
 	table.insert(self.ThreadList, thread)
 end
 

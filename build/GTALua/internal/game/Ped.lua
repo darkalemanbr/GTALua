@@ -29,7 +29,7 @@ end
 -- Weapon Switching
 function Ped:AllowWeaponSwitching(b)
 	self:_CheckExists()
-	if b == nil then b = true end
+	b = b or true
 	
 	natives.PED.SET_PED_CAN_SWITCH_WEAPON(self.ID, b)
 end
@@ -115,16 +115,11 @@ function Ped:GetNearbyPeds(max_peds)
 	self:_CheckExists()
 	
 	-- default value
-	if max_peds == nil then
-		-- lets just put a high number in here for now
-		max_peds = 100
-	end
+	max_peds = max_peds or 50
 	
 	-- c array
-	local array_size = 2 * max_peds + 2
-	local c_array_peds = CMemoryBlock(array_size * 4)
-	
-	-- index 0 defines the length of the array
+	local array_size = max_peds + 1
+	local c_array_peds = CMemoryBlock(array_size * 8)
 	c_array_peds:WriteInt32(0, max_peds)
 
 	-- call native
@@ -134,7 +129,7 @@ function Ped:GetNearbyPeds(max_peds)
 	local nearby_peds = {}
 	local i=0
 	while i<found do
-		offset = i*2+2
+		offset = (i+1)*2
 		local ped = Ped(c_array_peds:ReadDWORD32(offset))
 		if ped:Exists() then
 			table.insert(nearby_peds, ped)
@@ -152,13 +147,11 @@ function Ped:GetNearbyVehicles(max_vehicles)
 	self:_CheckExists()
 	
 	-- default value
-	if max_vehicles == nil then
-		max_vehicles = 50
-	end
+	max_vehicles = max_vehicles or 50
 	
 	-- c array
-	local array_size = 2 * max_vehicles + 2
-	local c_array_vehicles = CMemoryBlock(array_size * 4)
+	local array_size = max_vehicles + 1
+	local c_array_vehicles = CMemoryBlock(array_size * 8)
 	c_array_vehicles:WriteInt32(0, max_vehicles)
 	
 	-- call native
@@ -168,7 +161,7 @@ function Ped:GetNearbyVehicles(max_vehicles)
 	local nearby_vehicles = {}
 	local i=0
 	while i<found do
-		offset = i*2+2
+		offset = (i+1)*2
 		local veh = Vehicle(c_array_vehicles:ReadDWORD32(offset))
 		if veh:Exists() then
 			table.insert(nearby_vehicles, veh)
@@ -184,7 +177,7 @@ end
 -- Set Ped into specified vehicle's seat
 function Ped:SetIntoVehicle(vehicle, seat)
 	self:_CheckExists()
-	natives.PED.SET_PED_INTO_VEHICLE(self.ID, vehicle, seat);
+	natives.PED.SET_PED_INTO_VEHICLE(self.ID, vehicle, seat)
 end
 
 -- Explode Ped's head

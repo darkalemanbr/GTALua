@@ -95,7 +95,7 @@ end
 -- Sets whether the vehicle engine is on.
 function Vehicle:SetEngineState(b)
 	self:_CheckExists()
-	natives.VEHICLE.SET_VEHICLE_ENGINE_ON(self.ID,b,true)
+	natives.VEHICLE.SET_VEHICLE_ENGINE_ON(self.ID,b,true, true)
 end
 
 -- Checks whether the vehicle is on all wheels
@@ -115,7 +115,7 @@ function Vehicle:SetNeonLights(enabled, r, g, b, location)
 	self:_CheckExists()
 	
 	-- on/off
-	if location == nil then
+	if not location then
 		natives.VEHICLE._SET_VEHICLE_NEON_LIGHT_ENABLED(self.ID, 0, enabled)
 		natives.VEHICLE._SET_VEHICLE_NEON_LIGHT_ENABLED(self.ID, 1, enabled)
 		natives.VEHICLE._SET_VEHICLE_NEON_LIGHT_ENABLED(self.ID, 2, enabled)
@@ -125,7 +125,7 @@ function Vehicle:SetNeonLights(enabled, r, g, b, location)
 	end
 	
 	-- color
-	if r == nil then return end
+	if not r then return end
 	if type(r) == "table" then
 		b = r.b
 		g = r.g
@@ -153,34 +153,32 @@ function Vehicle:SetPlateText(text)
 	natives.VEHICLE.SET_VEHICLE_NUMBER_PLATE_TEXT(self.ID, text)
 end
 
--- Get vehicle name from its model hash
+-- Get vehicle name
 function Vehicle:GetModelName()
 	self:_CheckExists()
-	return VEHICLES[self:GetModel()]
+	return VEHICLES[self:GetModel()].Name
 end
 
--- Get vehicle codename from its name
-function Vehicle:GetCodename()
-	self:_CheckExists()
-	return VEHICLES[self:GetModelName()].Codename
-end
-
--- Get vehicle maker from its name
-function Vehicle:GetMaker()
-	self:_CheckExists()
-	return VEHICLES[self:GetModelName()].Maker
-end
-
--- Get vehicle full name from its name
-function Vehicle:GetFullName()
-	self:_CheckExists()
-	return VEHICLES[self:GetModelName()].FullName
-end
-
--- Get vehicle class from its name
+-- Get vehicle class
 function Vehicle:GetClass()
 	self:_CheckExists()
-	return VEHICLES[self:GetModelName()].Class
+	return VEHICLES[self:GetModel()].Class
+end
+
+-- Get vehicle maker
+function Vehicle:GetMaker()
+	self:_CheckExists()
+	local m = VEHICLES[self:GetModel()].Maker
+	if m ~= "" then
+		m = natives.UI._GET_LABEL_TEXT(m)
+	end
+	return m
+end
+
+-- Get vehicle full name
+function Vehicle:GetFullName()
+	self:_CheckExists()
+	return natives.UI._GET_LABEL_TEXT(natives.VEHICLE.GET_DISPLAY_NAME_FROM_VEHICLE_MODEL(self:GetModel()))
 end
 
 -- Get vehicle type
@@ -277,3 +275,36 @@ function Vehicle:SetWindowTint(t)
 	self:_CheckExists()
 	natives.VEHICLE.SET_VEHICLE_WINDOW_TINT(self.ID, t)
 end
+
+-- Get vehicle's Accent color
+function Vehicle:GetAccentColor()
+	self:_CheckExists()
+	local m_c = CMemoryBlock(4)
+	natives.VEHICLE._GET_VEHICLE_ACCENT_COLOR(self.ID, m_c)
+	local c = m_c:ReadDWORD32(0)
+	m_c:Release()
+	return c
+end
+
+-- Set vehicle's Accent color
+function Vehicle:SetAccentColor(c)
+	self:_CheckExists()
+	natives.VEHICLE._SET_VEHICLE_ACCENT_COLOR(self.ID, c)
+end	
+
+-- Get vehicle's Trim color
+function Vehicle:GetTrimColor()
+	self:_CheckExists()
+	local m_c = CMemoryBlock(4)
+	natives.VEHICLE._GET_VEHICLE_TRIM_COLOR(self.ID, m_c)
+	local c = m_c:ReadDWORD32(0)
+	m_c:Release()
+	return c
+end
+
+-- Set vehicle's Trim color
+function Vehicle:SetTrimColor(c)
+	self:_CheckExists()
+	natives.VEHICLE._SET_VEHICLE_TRIM_COLOR(self.ID, c)
+end	
+

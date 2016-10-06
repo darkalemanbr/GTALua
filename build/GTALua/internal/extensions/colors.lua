@@ -159,12 +159,18 @@ WornTaxiYellow = 126
 WornWhite = 132
 
 -- Colors in RGBA format
-COLOR_RED = 		{r=255,	g=0,	b=0,	a=255}
-COLOR_GREEN = 	{r=0,	g=255,	b=0,	a=255}
-COLOR_BLUE = 		{r=0,	g=0,	b=255,	a=255}
-COLOR_YELLOW = 	{r=255,	g=255,	b=0,	a=255}
-COLOR_YELLOW_50 =	{r=255,	g=255,	b=0,	a=128}
-COLOR_CYAN =		{r=0,	g=255,	b=255,	a=255}
-COLOR_PURPLE =	{r=255,	g=0,	b=255,	a=255}
-COLOR_WHITE =		{r=255,	g=255,	b=255,	a=255}
-COLOR_BLACK_50 = 	{r=0,	g=0,	b=0,	a=128}
+COLOR_RED		= {r=255, g=0,   b=0,   a=255}
+COLOR_RED_50	= {r=255, g=0,   b=0,   a=128}
+COLOR_GREEN		= {r=0,   g=255, b=0,   a=255}
+COLOR_GREEN_50	= {r=0,   g=255, b=0,   a=128}
+COLOR_BLUE		= {r=0,   g=0,   b=255, a=255}
+COLOR_BLUE_50	= {r=0,   g=0,   b=255, a=128}
+COLOR_YELLOW	= {r=255, g=255, b=0,   a=255}
+COLOR_YELLOW_50	= {r=255, g=255, b=0,   a=128}
+COLOR_CYAN		= {r=0,   g=255, b=255, a=255}
+COLOR_CYAN_50	= {r=0,   g=255, b=255, a=128}
+COLOR_PURPLE	= {r=255, g=0,   b=255, a=255}
+COLOR_PURPLE_50	= {r=255, g=0,   b=255, a=128}
+COLOR_WHITE		= {r=255, g=255, b=255, a=255}
+COLOR_WHITE_50	= {r=255, g=255, b=255, a=128}
+COLOR_BLACK_50	= {r=0,   g=0,   b=0,   a=128}

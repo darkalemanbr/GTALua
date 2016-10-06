@@ -42,6 +42,17 @@ function console.cmd_unload_addon(name)
 end
 console.RegisterCommand("unload", console.cmd_unload_addon)
 
+-- Unload All Addons
+function console.cmd_unload_all_addons()
+	print("[GTALua] Unloading all addons...")
+	for  _,thread in pairs(scripthookv.ThreadList) do
+		local name = thread:GetName()
+		if name ~= "main_thread" then addon.Unload(name) end
+	end
+	print("")
+end
+console.RegisterCommand("unloadall", console.cmd_unload_all_addons)
+
 -- Reload All Addons
 function console.cmd_reload_all_addons()
 	print("[GTALua] Reloading all addons...")

@@ -33,7 +33,6 @@ function ui.DrawTextUI(text, x, y, font, scale, color, blink)
 	font = font or FontChaletComprimeCologne
 	scale = scale or .5
 	color = color or {r=255, g=255, b=255, a=255}
-	blink = blink or false
 
 	local draw = not blink
 
@@ -49,14 +48,27 @@ function ui.DrawTextUI(text, x, y, font, scale, color, blink)
 	end
 end
 
+-- Prints a message to the game's help area
+function ui.HelpMessage(text)
+	natives.UI._SET_TEXT_COMPONENT_FORMAT("STRING")
+	natives.UI.ADD_TEXT_COMPONENT_SUBSTRING_PLAYER_NAME(text)
+	natives.UI._DISPLAY_HELP_TEXT_FROM_STRING_LABEL(0, false, false, -1)
+end
+
+-- Prints a message above the game map
+function ui.MapMessage(text)
+	natives.UI._SET_NOTIFICATION_TEXT_ENTRY("STRING")
+	natives.UI.ADD_TEXT_COMPONENT_SUBSTRING_PLAYER_NAME(text)
+	natives.UI._DRAW_NOTIFICATION_3(false, true)
+end
+
 -- Read a line from the onscreen keyboard
 function ui.OnscreenKeyboard(title, size)
 	size = size or 20
-	title = title or nil
 	natives.GAMEPLAY.DISPLAY_ONSCREEN_KEYBOARD(1, "", "", "", "", "", "", size)
 	while (natives.GAMEPLAY.UPDATE_ONSCREEN_KEYBOARD() == 0) do 
 		coroutine.yield()
-		if title ~= nil then
+		if title then
 			ui.DrawTextUI(title, .3, .36)
 		end
 	end
@@ -66,7 +78,6 @@ end
 -- Draws a 3D point
 function ui.Draw3DPoint(p, size, color, blink)
 	size = size or 1
-	blink = blink or false
 	local cx = color or COLOR_RED
 	local cy = color or COLOR_GREEN
 	local cz = color or COLOR_BLUE
@@ -88,7 +99,6 @@ end
 -- Draws a 3D line
 function ui.Draw3DLine(p1, p2, color, blink)
 	color = color or COLOR_WHITE
-	blink = blink or false
 	local draw = not blink
 	if math.floor(game.GetSeconds()/10)%2 == 0 or draw then
 		natives.GRAPHICS.DRAW_LINE(p1.x, p1.y, p1.z, p2.x, p2.y, p2.z, color.r, color.g, color.b, color.a)
@@ -98,7 +108,6 @@ end
 -- Draws a 3D polygon
 function ui.Draw3DPoly(p1, p2, p3, color, blink)
 	color = color or COLOR_WHITE
-	blink = blink or false
 	local draw = not blink
 	if math.floor(game.GetSeconds()/10)%2 == 0 or draw then
 		natives.GRAPHICS.DRAW_POLY(p1.x, p1.y, p1.z, p2.x, p2.y, p2.z, p3.x, p3.y, p3.z, color.r, color.g, color.b, color.a)
@@ -108,7 +117,6 @@ end
 -- Draws a 3D box (solid)
 function ui.Draw3DBox(p1, p2, color, blink)
 	color = color or COLOR_WHITE
-	blink = blink or false
 	local draw = not blink
 	if math.floor(game.GetSeconds()/10)%2 == 0 or draw then
 		natives.GRAPHICS.DRAW_BOX(p1.x, p1.y, p1.z, p2.x, p2.y, p2.z, color.r, color.g, color.b, color.a)

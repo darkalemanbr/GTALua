@@ -65,9 +65,7 @@ end
 
 -- Notify Above Map
 function gui.NotifyAboveMap(text, blink)
-	if blink == nil or type(blink) ~= "boolean" then
-		blink = false
-	end
+	blink = blink == true
 
 	natives.UI._SET_NOTIFICATION_TEXT_ENTRY("STRING")
 	natives.UI.ADD_TEXT_COMPONENT_SUBSTRING_PLAYER_NAME(text)

@@ -19,7 +19,6 @@ include("extensions/CScriptThread.lua")
 include("extensions/CScriptThread_EventHandlers.lua")
 include("extensions/CScriptThread_Timers.lua")
 include("extensions/Vector.lua")
-include("extensions/CMemoryBlock.lua")
 
 -- Wrapper
 include("game/Entity.lua")

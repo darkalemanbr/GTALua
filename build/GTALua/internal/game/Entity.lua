@@ -29,7 +29,7 @@ end
 Entity.IsPersistant = Entity.IsMissionEntity
 function Entity:SetMissionEntity(toggle)
 	self:_CheckExists()
-	natives.ENTITY.SET_ENTITY_AS_MISSION_ENTITY(self.ID, toggle or true, true)
+	natives.ENTITY.SET_ENTITY_AS_MISSION_ENTITY(self.ID, toggle or true, false)
 end
 Entity.SetPersistant = Entity.SetMissionEntity
 
