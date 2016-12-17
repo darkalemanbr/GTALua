@@ -9,6 +9,7 @@
 #include "ScriptBinds.h"
 #include "thirdparty/ScriptHookV/ScriptHookV.h"
 #include "keyboard.h"
+#include "Memory/GameMemory.h"
 
 // Imports
 typedef void(*RegisterThread_Proxy_t)();

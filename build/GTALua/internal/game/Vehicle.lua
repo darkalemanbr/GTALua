@@ -168,7 +168,7 @@ end
 -- Get vehicle maker
 function Vehicle:GetMaker()
 	self:_CheckExists()
-	local m = VEHICLES[self:GetModel()].Maker
+	local m = VEHICLES[self:GetModel()].Maker or ""
 	if m ~= "" then
 		m = natives.UI._GET_LABEL_TEXT(m)
 	end
