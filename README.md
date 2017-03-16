@@ -5,7 +5,7 @@ This version of GTALua is forked from Freeeaky's project, but has many changes t
 It is updated to the latest game version, but it can't be used to go online anymore. Online modding is not operational in the main game.
 This could be used though, in theory, to go "online" on mods like FiveReborn and MultiFive.
 
-#Mods
+# Mods
 The addons folder contains two mods I created in GTALua. MyAddon is one I used to mod cars, spawn enemies, turn peds into terrorists, this kind of stuff. PublicParking enables public garages around the city, so cars can be stored in any of them.
 
 # GTALua
