@@ -1,3 +1,5 @@
+### As of v944 this GTALua will not be updated anymore. For a GTALua which works on v1011 and later please check GTALua2
+
 # GTALua-Online
 This version of GTALua is forked from Freeeaky's project, but has many changes to its code, mainly some code cleanup and option to allow its use online. This is the copy that I was using online back in the days.
 It is updated to the latest game version, but it can't be used to go online anymore. Online modding is not operational in the main game.
